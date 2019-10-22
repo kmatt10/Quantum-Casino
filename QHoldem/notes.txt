@@ -1,0 +1,25 @@
+Quantum Hold'em
+Quantum version of hold'em (as the name implies)
+
+So far thinking of the game being 5 qubits with two randomly initialized (H measure) then the river being quantum gates selected from [I,X,H,Z,CNOT] usual poker betting rounds and then a new gate is 'applied' to the next qubit(s) at random
+
+highest value or scoring system
+
+scoring:
+all 1s: 20
+all 0s: 15
+Palindrome:5
+1 for each 1 (Max of 4)
+
+
++$10 to 'stand' costs more since you have full knowledge of the post-state
++$5 for new gate costs less since you lack knowledge of the post-state
+or fold
+
+to start with I think just trying to maximize the points/$ would be fine and give a concrete goal.
+
+
+The game loop:
+Prompt player for action
+Execute depending on action
+display new state
