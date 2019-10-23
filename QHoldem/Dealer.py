@@ -1,51 +1,49 @@
-from qiskit import IBMQ
-from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
+from qiskit import IBMQ, Aer, execute
 import random
+
 
 class Dealer:
     """ Handles drawing a new 'card' and applying it to the circuit
         as well
     """
-    def __init__(self, circ, qreg, creg):
+    def __init__(self, circ):
         self.circ = circ
-        self.qreg = qreg
         self.pool = 0
-        self.creg = creg
-        #self.spent_qubits = []
-        #self.current_qubit = random.randint(0,4)
-        #for potentially using random qubit registers depending on how it plays
         self.current_qubit = 0
 
     def action(self, choice, player):
-        if (choice == "0"): #player "draws"
+        if choice == 0:  # player "draws"
             player.bet(5)
             self.bet(5)
-            roll = random.randint(0,4) if (current_qubit > 0) else random.randint(0,3)
-            if (roll == 0):
+            roll = random.randint(0, 4) if (self.current_qubit > 0) else random.randint(0, 3)
+            if roll == 0:
                 outcome = "I"
-            elif (roll == 1):
-                self.circ.x(qreg[current_qubit])
+            elif roll == 1:
+                self.circ.x(self.current_qubit)
                 outcome = "X"
-            elif (roll == 2):
-                self.circ.h(qreg[current_qubit])
+            elif roll == 2:
+                self.circ.h(self.current_qubit)
                 outcome = "H"
-            elif (roll == 3):
-                self.circ.z(qreg[current_qubit])
+            elif roll == 3:
+                self.circ.z(self.current_qubit)
                 outcome = "Z"
-            elif (roll == 4):
-                self.circ.cx(self.qreg[current_qubit],self.qreg[current_qubit-1])
+            elif roll == 4:
+                self.circ.cx(self.current_qubit, self.current_qubit - 1)
                 outcome = "C"
+            else:
+                outcome = "error"
             self.current_qubit += 1
             return outcome
-            
-        elif (choice == "1"): #player "stands"
+
+        elif choice == 1:  # player "stands"
             player.bet(10)
             self.bet(10)
             self.current_qubit += 1
-            return 1
-        else return 0
-            
-    def bet(self,amount):
+            return "I"
+        else:
+            return 0
+
+    def bet(self, amount):
         self.pool += amount
 
     def finished(self):
@@ -56,4 +54,9 @@ class Dealer:
         """for after the game is finished and it is time to measure and
             process the results
         """
-        pass
+        self.circ.measure(range(5),range(5))
+        simulator = Aer.get_backend('qasm_simulator')
+        job = execute(self.circ, simulator, shots=1)
+        result = job.result()
+        counts = result.get_counts(self.circ)
+        return max(counts, key=counts.get)
