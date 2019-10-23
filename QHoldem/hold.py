@@ -38,7 +38,6 @@ def main():
 
     state_position = []
     state_string = ["0", "0", "0", "0", "0"]
-    random.seed(42)
     state_position.append(random.randint(0, 4))
     state_position.append(random.randint(0, 4))
 
@@ -57,7 +56,7 @@ def main():
         print("--" * 30)
         print("Total Points: %d" % player.points)
         print("Round: %d/5" % (game.current_qubit + 1))
-        print("Cash: %d" % player.wallet)
+        print("Cash: $%d" % player.wallet)
         print("Currently status of qubits:")
         print(state_string)
 
