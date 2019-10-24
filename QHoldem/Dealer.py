@@ -60,3 +60,7 @@ class Dealer:
         result = job.result()
         counts = result.get_counts(self.circ)
         return max(counts, key=counts.get)
+
+    def reset(self, new_circ):
+        self.current_qubit = 0
+        self.circ = new_circ
