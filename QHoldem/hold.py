@@ -1,4 +1,4 @@
-from qiskit import IBMQ, BasicAer
+from qiskit import BasicAer
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
 import random
 from Dealer import Dealer
@@ -21,7 +21,7 @@ def score(win_string):
         method = "Palindrome string!"
         points = 10
     else:
-        method = "count of 1s"
+        method = "1s"
         points = win_string.count('1')
     return method, points
 
