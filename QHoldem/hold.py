@@ -27,7 +27,6 @@ def score(win_string):
 
 
 def main():
-    # start while loop conditioned on player still has money (initialize the stuff)
     circ = QuantumCircuit(5, 5)
     q = QuantumRegister(5, 'q')
     c = ClassicalRegister(5, 'c')
@@ -76,7 +75,6 @@ def main():
                 new_gate = "CNOT"
             print("You drew %s!" % new_gate)
 
-        # outside of loop; run the finished circuit
         print("--" * 30)
         print("Your final state is:")
         time.sleep(1)
@@ -92,7 +90,7 @@ def main():
         print("Prepare for the next game!")
         time.sleep(1)
         print("\n"*5)
-    #player out of money
+
     print("You finished %d rounds with %d points!" % (player.rounds, player.points))
     print("Your points/$ was %3f" % (player.points / 100))
 
