@@ -58,7 +58,7 @@ def main():
             print("Total Points: %d" % player.points)
             print("Round: %d/5" % (game.current_qubit + 1))
             print("Cash: $%d" % player.wallet)
-            print("Currently status of qubits:")
+            print("Current status of qubits:")
             print("|" + ' '.join(state_string[::-1]) + ">")
 
             choice = input("'0': Hit($5)  '1': Stand($10)?")
@@ -85,9 +85,10 @@ def main():
         method, points = score(final_string)
         player.win(points)
         print("The result:")
-        print("|" + ''.join(final_string[::-1]) + ">")
+        print("|" + ''.join(final_string[::+1]) + ">")
         print("You won %d points by means of %s" % (points, method))
-        print("Prepare for the next game!")
+        if !player.broke():
+            print("Prepare for the next game!")
         time.sleep(1)
         print("\n"*5)
 
