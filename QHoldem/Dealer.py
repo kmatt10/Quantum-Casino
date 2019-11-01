@@ -1,4 +1,4 @@
-from qiskit import IBMQ, Aer, execute
+from qiskit import Aer, execute
 import random
 
 

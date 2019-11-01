@@ -1,4 +1,3 @@
-from qiskit import BasicAer
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
 import random
 from Dealer import Dealer
@@ -87,7 +86,7 @@ def main():
         print("The result:")
         print("|" + ''.join(final_string[::+1]) + ">")
         print("You won %d points by means of %s" % (points, method))
-        if !player.broke():
+        if not player.broke():
             print("Prepare for the next game!")
         time.sleep(1)
         print("\n"*5)
