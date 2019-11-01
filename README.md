@@ -21,3 +21,5 @@ Scoring is as such:
     or a point for each 1 in the result.
 
 The game only runs on a simulator for now but with the 5 qubit limit it can run on actual quantum hardware provided through qiskit
+
+only requires qiskit
